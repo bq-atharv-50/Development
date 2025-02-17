@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="heading-1"> Hello world </h1>
+    <div id="div-1">
+
+    </div>
+
+    <script>
+        const h1 = document.getElementById("heading-1");
+        const div_1 = document.querySelector('#div-1');
+
+        h1.textContent ="Atharv"
+        console.log(h1);
+        console.log("Hello")
+        
+        
+        let newHeading = document.createElement("h2");
+        let newHeading2 = document.createElement("h3");
+        
+        console.log(newHeading);
+        console.log(newHeading2);
+
+        div_1.append("Append using append()");
+        newHeading2.textContent = "Added h3 tag using append() "
+
+        div_1.append(newHeading2);
+
+        newHeading.textContent = "Adding new Heading using AppendChild()";
+        div_1.appendChild(newHeading);
+
+        let divBefore = document.createElement("div");
+        divBefore.textContent = "In the divBefore ";
+        div_1.insertAdjacentElement("beforebegin" , divBefore)
+
+        //div_1.removeChild(newHeading);
+
+        divBefore.style.color = "green";
+        divBefore.setAttribute("id" , "div-before");
+
+    </script>
+</body>
+</html>
