@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            transition: all 3s;
+        }
+        .round{
+            border-radius: 50%;
+            transform: rotate(1turn);
+            box-shadow: 0 0 10px black;
+
+        }
+        form{
+            border: 1px solid black;
+            margin: 10px;
+            padding: 10px;
+            height: auto;
+            gap: 10px;
+        }
+        form label{
+            border: 1px solid black;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <article class="item">
+        <h2>Im an article</h2>
+        <p class="pizza">This is how many pizzas I ate! 🍕</p>
+      </article>
+
+    <img class="nice cool"   src="https://picsum.photos/500" />
+
+    <img class="custom" data-name="wes" src="https://picsum.photos/200" />
+    <img data-name="kait"class="custom1" src="https://picsum.photos/200" />
+    <img data-name="lux" class="custom2" src="https://picsum.photos/200" />
+    <!-- <img class="'cool"  src="https://picsum.photos/500" /> -->
+
+    <form>
+        <label for="name" id="name-label">Name</label>
+        <input name="name" type="text" id="name-input" placeholder="Enter Name">
+        <br>
+        <label for="address" id="name-label">address</label>
+        <input name="adderss" type="text" id="address-input" placeholder="Enter address">
+        <br>
+        <label for="city" id="name-label">state</label>
+        <input name="city" type="text" id="city-input" placeholder="Enter city">
+        <br>
+        <button id="submit-btn">Submit</button>
+        <!-- <button id="make-obj-btn">make object</button> -->
+    </form>
+    <button id="make-obj-btn">make object</button>
+      <script>
+        const pizzaList = document.querySelector('.pizza');
+        console.log(pizzaList.textContent);
+
+        // // slow method for updating a new item in list if html is large
+        // pizzaList.textContent = `${pizzaList.textContent} 🍕`;
+        // console.log(pizzaList)
+
+        // instead we use inserAjacentText() takes two parameter 1,position , 2.text
+        pizzaList.insertAdjacentText("beforeend",'🍕');
+
+        // adding a classes
+        const pic = document.querySelector('.nice');
+        console.log(pic.classList);
+        pic.classList.add('open')
+
+        // removing a class 
+        pic.classList.remove('cool');
+
+        //toggling a class
+        //pic.classList.toggle('round');
+
+        function tooggleRound(){
+            pic.classList.toggle('round');
+        }
+        pic.addEventListener('click', tooggleRound);
+
+        // contain method
+        //return true or false based on wether that element has the class or not .
+        console.log(pic.classList.contains('open'));
+      
+        //adding attributes 
+        pic.alt= "cup-cake"
+        pic.width = 200;
+
+        //getAttribute
+        console.log(pic.getAttribute('alt'));
+
+        //setAttribute
+        pic.setAttribute('alt' , 'Small cup cake');
+        console.log(pic.getAttribute('alt'));
+
+        //data attributes
+        const custom = document.querySelector('.custom');
+        const custom1 = document.querySelector('.custom1');
+        const custom2 = document.querySelector('.custom2');
+
+        //console.log(custom.data);  undefined
+        // to access the data attributes on the element you would call dataset
+        //useful because we can do things like listen for a click on a element 
+        // and when someone clicks on it we can alert them
+        console.log(custom.dataset);
+        // adding event listner on dataset
+        custom.addEventListener('click' ,function (e){
+                console.log(e); // pointerID width height 
+                alert(`Welcome ${custom.dataset.name}`);
+        })
+
+        custom.addEventListener('keydown' ,function (e){
+                console.log(e); // pointerID width height 
+                alert(`Welcome ${custom.dataset.name}`);
+        })
+
+        custom1.addEventListener('dblclick' , function (event){
+            console.log(event); // gives screenX , screenY , clientX , clientY 
+            alert(`you double clicked ${custom1.dataset.name}`);
+        })
+
+        custom2.addEventListener('contextmenu' ,function (e){
+                console.log(e); // // pointer id , width , height
+                alert(`Welcome ${custom2.dataset.name}`);
+        })      
+        
+        // form element
+
+        const btn = document.querySelector('#submit-btn');
+        const name = document.querySelector('#name-input');
+        const address = document.querySelector('#address-input');
+        const city = document.querySelector('#city-input');
+        const makeObj =  document.querySelector('#make-obj-btn')
+         
+        let Users = [];
+        let naam="";
+        let add="";
+        let cy="";
+
+
+
+        makeObj.addEventListener('click', function(e){
+            console.log(e);
+            let obj = {};
+            Object.assign(obj , {name : naam});
+            Object.assign(obj , {address : add});
+            Object.assign(obj , {city : cy});
+            
+            console.log(obj);
+            Users.push(obj);
+
+            console.log(Users);
+        })
+
+        
+        name.addEventListener('keyup' ,function (e){
+                console.log(e); // pointerID width height 
+                alert(`Keybord clicked`);
+        })
+
+        name.addEventListener('blur', function(e){
+
+            console.log(e);
+            naam = e.target.value;
+         
+            console.log(e.target.value);
+        })
+
+
+        address.addEventListener('change', function(e){
+
+            console.log(e);
+            add = e.target.value;
+            console.log(e.target.value);
+        })
+        city.addEventListener('input', function(e){
+
+            console.log(e);
+            cy = e.target.value;
+            console.log(e.target.value);
+        })
+
+        btn.addEventListener('submit', function(e){
+
+            makeobj();
+            console.log(e);
+            console.log(submitted);
+        });
+
+        function makeobj(){
+            let obj = {}
+            Object.assign(obj , {name : naam});
+
+            console.log(obj);
+        }
+
+      </script>
+</body>
+</html>
