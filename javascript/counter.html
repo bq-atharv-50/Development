@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+    </head>
+    <body>
+     
+        <h3> Counter </h3>
+        <div>
+            <div id="dec">-</div>
+            <div id="val">0</div>
+            <div id="inc">+</div>
+            <button id="res">reset</button>
+        </div>
+        
+        <script>
+            // counter js
+            let inc = document.querySelector("#inc");
+            let value = document.querySelector("#val");
+            let dec = document.querySelector("#dec");
+            let res = document.querySelector("#res");
+
+            //creating private varaible using closure
+            function closure(){
+                let cnt = 0;
+                return {
+                    inc : function(){
+                        cnt++;
+                        value.textContent = cnt;
+                    },
+                    dec : function(){
+                        cnt--;
+                        value.textContent = cnt;
+                    },
+                    reset : function() {
+                        cnt = 0;
+                        value.textContent = cnt;
+                    }
+                }
+            }
+
+            let obj = closure();
+            
+            //res.addEventListener('click' , ()=> obj.reset() );
+                function helper(){
+                    obj.reset();
+                }
+            res.addEventListener('click' , helper );
+            inc.addEventListener('click', ()=> obj.inc() );
+            dec.addEventListener('click', () => obj.dec() );
+            
+
+        </script>
+    </body>
+</html>

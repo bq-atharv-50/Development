@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="xhr">Click to start request</button>
+    <button id="reload">Reload</button>
+
+    <pre readonly class="event-log"></pre>
+    
+    
+    <script>
+        const log = document.querySelector(".event-log");
+
+        document.querySelector("#xhr").addEventListener("click", () => {
+            log.textContent = "";
+
+            const xhr = new XMLHttpRequest();
+
+            xhr.addEventListener("loadend", () => {
+                log.textContent = `${log.textContent}Finished with status: ${xhr.status}`;
+            });
+
+            xhr.open(
+                "GET",
+                "https://raw.githubusercontent.com/mdn/content/main/files/en-us/_wikihistory.json",
+             );
+
+            xhr.send();
+            log.textContent = `${log.textContent}Started XHR request\n`;
+        });
+
+        document.querySelector("#reload").addEventListener("click", () => {
+            log.textContent = "";
+            document.location.reload();
+        });
+
+
+        // callback hell
+        function add1(init, callback_func){
+            let result =  init + 1;
+            callback_func(result); 
+        }
+        function add2(init, callback_func){
+            let result =  init + 2;
+            callback_func(result); 
+        }
+        function add3(init, callback_func){
+            let result =  init + 3;
+            callback_func(result); 
+        }
+
+        function operation(){
+            add1(0 , (result1)=>{
+                add2(result1 , (result2)=>{
+                    add3(result2 , (result3)=> {
+                        console.log(result3);
+                    })
+                })
+            })
+        }
+
+        operation();
+
+
+
+        //promises
+        const fetchPromise = fetch("https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json");
+
+        //console.log(fetchPromise);
+
+        fetchPromise.then( (response) =>{
+            console.log(response);
+            console.log(`Received response : ${response.status}`);
+        });
+
+        console.log("Started request...")
+
+        // new Promise( (resoleOuter) =>{
+        //     resoleOuter(
+        //         new Promise ( (resloveInner) => {
+        //             setTimeout(resloveInner , 1000);
+        //         }),
+        //     );
+        // });
+
+        const myPromise = new Promise ( (resolve ,reject ) =>{
+            setTimeout( ()=>{ 
+                    fetch('https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json')
+                    .then( (response)=>{
+                        resolve(response);
+                    } )
+                    .catch( (error) => {
+                        console.log('got error');
+                        reject(error);
+                    }) 
+            } , 3000 )
+        });
+
+        myPromise.then( (response)=>{
+            console.log(response);
+        })
+        .catch( (error)=>{
+            console.log(error);   
+        })
+        
+
+
+        const promise2  = new Promise( (resolve , reject) =>{
+
+            let a = true;
+
+            setTimeout( ()=>{
+                if(a){
+                    resolve("Promise resolve sucessfully");
+                }
+                else{
+                    reject("Promise rejected");
+                }
+            } ,3000 )
+        } );
+        console.log("promise 2 " , promise2);
+
+        promise2.then( (response)=>{
+            console.log(response);
+        } )
+        .catch( (error)=>{
+            console.log(error);
+        })
+        .finally( ()=>{
+            console.log("Promise completed");
+            console.log("promise 2" , promise2);
+        })
+
+
+        //function return a  promise 
+        //fetching API
+        function fetch_API(){
+            return new Promise ( (resolve, reject) =>{
+
+                setTimeout( ()=>{
+                    fetch('https://jsonplaceholder.typicode.com/posts/1')
+                    .then( (response)=>{
+                        let data = response.json();
+                        resolve(data);
+                    })
+                    .catch( (error)=>{
+                        reject(error);
+                    })
+                }, 300 )
+            })
+        }
+
+        fetch_API()
+                    .then((response)=>{
+                        console.log(response);
+                    } )
+                    .catch((error)=>{
+                        console.log(error)
+                    })
+                    .finally(()=>{
+                        console.log(`JSON API final value`);
+                    })
+
+
+
+
+    // chaining Promises 
+    
+    function firstTask(){
+        return new Promise( (resolve, reject)=>{
+            setTimeout(()=>{
+                console.log("First task completed with ")
+                resolve("data from first Task")
+            }, 1000)
+        })
+    }
+    function SecondTask(data){
+        return new Promise( (resolve, reject)=>{
+            setTimeout(()=>{
+                console.log("Second task completed with",data)
+                resolve("data from second Task")
+            }, 1000)
+        })
+    }
+
+    firstTask()
+                .then((response)=>{
+                        //console.log(resolve);
+                        let data = response;
+                         SecondTask(data)
+                                        .then((finalResponse)=>{
+                                            console.log("Final response " , finalResponse);
+                                        })
+                                        .catch((error)=>{
+                                            console.log("error from 2 ",error);
+                                        })
+                                        .finally(()=>{
+                                            console.log("Whole execution of chaining is done!!!")
+                                        })
+                })
+                .catch((error)=>{
+                    console.log("error form 1 ", error)
+                })
+                .finally(()=>{
+                    console.log("Finally First task over ")
+                })
+    
+        // Promise.all() -> multiple independent promises need to be resolved
+        Promise.all([firstTask() , SecondTask(), myPromise , promise2])
+                .then((result)=>{
+                    console.log("ALL PROMISED RESOLVED !!");
+                })
+                .catch((error)=>{
+                    console.log("ERROR IN ONE OF THE PROMISES", error);
+                })
+
+        //promise.race() -> resolve or reject as soon as the first promise settles.
+        //  Promise.race([firstTask() , SecondTask()])
+        // .then((result)=>{
+        //             console.log("ALL PROMISED RESOLVED !!");
+        //         })
+        //         .catch((error)=>{
+        //             console.log("ERROR IN ONE OF THE PROMISES", error);
+        //         })
+
+    </script>
+</body>
+</html>
