@@ -1,0 +1,225 @@
+<!-- form tag is used to create a form for collectig user input. -->
+<!-- it act as a container for various form element like text fields , checkboxes
+radio button, submit btn and more.
+Attributes of form method
+1. action -> specify the url where form data should be sent 
+    //if left empty it should , the form submit to the same page
+
+2. method-> Define how the form data should be sent.
+    two possible values GET  = send the data as query string in url. 
+    POST = sends the data in request body.
+
+3. enctype(Encoding type) -> used with POST method only , define how form data is encoded 
+before bieng is sent.
+
+4.target -> specifies where to open the response after the submission
+    _self(default) open the same tab.
+    _blank opens a new tab.
+    _parent opens in the parent frame.
+    _top opens in the full window 
+
+5. name -> gives the form an identifier for js access -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+</head>
+<body>
+    <form   method="POST" enctype="multipart/form-data" target="_self" autocomplete="on">
+
+        <fieldset>
+            <legend>Personal Details</legend>
+            <label for="fname">First name:</label>
+            <input type="text" id="fname" name="fname" placeholder="Enter the fname" required>
+            <label for="lname">Last name:</label>
+            <input type="text" id="lname" name="lname" placeholder="Enter the lname" required>
+        </fieldset>
+        
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter the Password" required>
+
+        <label for="email">Email id:</label>
+        <input type="email" id="email" name="email" required placeholder="abc@gmail.com">
+        <!-- @ is required-->
+
+        <label for="number">Age:</label>
+        <input type="number" id="number" name="age"  min="1" max="150">
+        <!-- min and max define the limit -->
+
+        <label for="phone">Mobile no: </label>
+        <input type="tel" id="phone" name="'phone" pattern="[0-9]{10}"  placeholder="1234567890">
+        <!-- pattern="\+91[0-9]{10}"  enter 10 digit with +91  --> 
+        <!-- pattern="(\+91)[0-9]{10}"  enter 10 digit with +91 or without +91  -->
+
+
+        <label for="dob">Date of Birth: </label>
+        <input type="date" id="dob" name="dob">
+        
+        <label for="profilePic">Profile Picture:</label>
+        <input type="file" id="profilePic" name="profilePic" accept="image/*">
+        <!--  allow user to upload file -->
+        <!-- accept="image/*" allow all image
+        accept="image/png , image/jpeg" allow jpeg, and png
+        accept="aplication/pdf" only pdf -->
+        
+        <label>
+            <input type="checkbox" name="subscribe" value="yes">Subscribe to newsLetter 
+        </label>
+
+        <p>Choose your Gender: </p>
+        <label>
+            <input type="radio" name="gender" value="male">Male
+        </label>
+        <label>
+            <input type="radio" value="female" name="gender">Female
+        </label>
+        <!-- all the radio buttons in a group share same Attributes -->
+
+        <label for="volume">Volume: </label>
+        <input type="range" id="volume" min="0" max="100" name="volume" value="10" >
+        <!-- value="50"  Default value is set to 50. -->
+
+        <label for="country">Select Country: </label>
+        <select id="country" name="country">
+            <option value="us">United State</option>
+            <option value="uk">United Kingdom</option>
+            <option value="ca">Canada</option>
+        </select>
+
+        <label for="city">City:</label>
+        <input list="cities" id="city" name="city">
+        <datalist id="cities">
+            <option value="New York">
+            <option value="London">
+            <option value="Paris">
+            <option value="Tokyo">
+        </datalist>
+
+
+        <label for="message">Add Description: </label>
+<textarea id="message" name="message" rows="4" cols="30">Why is this not working?</textarea>
+
+
+        <input type="submit">Submit</button>
+        <!--SEND FORM DATA TO THE SERVER-->
+        <input type="reset" value="reset">
+    </form>
+
+</body>
+</html><!-- form tag is used to create a form for collectig user input. -->
+<!-- it act as a container for various form element like text fields , checkboxes
+radio button, submit btn and more.
+Attributes of form method
+1. action -> specify the url where form data should be sent 
+    //if left empty it should , the form submit to the same page
+
+2. method-> Define how the form data should be sent.
+    two possible values GET  = send the data as query string in url. 
+    POST = sends the data in request body.
+
+3. enctype(Encoding type) -> used with POST method only , define how form data is encoded 
+before bieng is sent.
+
+4.target -> specifies where to open the response after the submission
+    _self(default) open the same tab.
+    _blank opens a new tab.
+    _parent opens in the parent frame.
+    _top opens in the full window 
+
+5. name -> gives the form an identifier for js access -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+</head>
+<body>
+    <form   method="POST" enctype="multipart/form-data" target="_self" autocomplete="on">
+
+        <fieldset>
+            <legend>Personal Details</legend>
+            <label for="fname">First name:</label>
+            <input type="text" id="fname" name="fname" placeholder="Enter the fname" required>
+            <label for="lname">Last name:</label>
+            <input type="text" id="lname" name="lname" placeholder="Enter the lname" required>
+        </fieldset>
+        
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter the Password" required>
+
+        <label for="email">Email id:</label>
+        <input type="email" id="email" name="email" required placeholder="abc@gmail.com">
+        <!-- @ is required-->
+
+        <label for="number">Age:</label>
+        <input type="number" id="number" name="age"  min="1" max="150">
+        <!-- min and max define the limit -->
+
+        <label for="phone">Mobile no: </label>
+        <input type="tel" id="phone" name="'phone" pattern="[0-9]{10}"  placeholder="1234567890">
+        <!-- pattern="\+91[0-9]{10}"  enter 10 digit with +91  --> 
+        <!-- pattern="(\+91)[0-9]{10}"  enter 10 digit with +91 or without +91  -->
+
+
+        <label for="dob">Date of Birth: </label>
+        <input type="date" id="dob" name="dob">
+        
+        <label for="profilePic">Profile Picture:</label>
+        <input type="file" id="profilePic" name="profilePic" accept="image/*">
+        <!--  allow user to upload file -->
+        <!-- accept="image/*" allow all image
+        accept="image/png , image/jpeg" allow jpeg, and png
+        accept="aplication/pdf" only pdf -->
+        
+        <label>
+            <input type="checkbox" name="subscribe" value="yes">Subscribe to newsLetter 
+        </label>
+
+        <p>Choose your Gender: </p>
+        <label>
+            <input type="radio" name="gender" value="male">Male
+        </label>
+        <label>
+            <input type="radio" value="female" name="gender">Female
+        </label>
+        <!-- all the radio buttons in a group share same Attributes -->
+
+        <label for="volume">Volume: </label>
+        <input type="range" id="volume" min="0" max="100" name="volume" value="10" >
+        <!-- value="50"  Default value is set to 50. -->
+
+        <label for="country">Select Country: </label>
+        <select id="country" name="country">
+            <option value="us">United State</option>
+            <option value="uk">United Kingdom</option>
+            <option value="ca">Canada</option>
+        </select>
+
+        <label for="city">City:</label>
+        <input list="cities" id="city" name="city">
+        <datalist id="cities">
+            <option value="New York">
+            <option value="London">
+            <option value="Paris">
+            <option value="Tokyo">
+        </datalist>
+
+
+        <label for="message">Add Description: </label>
+<textarea id="message" name="message" rows="4" cols="30">Why is this not working?</textarea>
+
+
+        <input type="submit">Submit</button>
+        <!--SEND FORM DATA TO THE SERVER-->
+        <input type="reset" value="reset">
+    </form>
+
+</body>
+</html>
